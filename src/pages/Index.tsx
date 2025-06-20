@@ -23,8 +23,13 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  const { data: categories = [], isLoading: categoriesLoading } = useCategories();
-  const { data: resources = [], isLoading: resourcesLoading } = useResources();
+  const { data: categories = [], isLoading: categoriesLoading, error: categoriesError } = useCategories();
+  const { data: resources = [], isLoading: resourcesLoading, error: resourcesError } = useResources();
+
+  console.log('Categories:', categories);
+  console.log('Resources:', resources);
+  console.log('Categories loading:', categoriesLoading);
+  console.log('Resources loading:', resourcesLoading);
 
   const categoryNames = ["All", ...categories.map(cat => cat.name)];
 
@@ -184,6 +189,16 @@ const Index = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
         <div className="text-white text-xl">Loading resources...</div>
+      </div>
+    );
+  }
+
+  if (categoriesError || resourcesError) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+        <div className="text-red-300 text-xl">
+          Error loading data: {categoriesError?.message || resourcesError?.message}
+        </div>
       </div>
     );
   }
