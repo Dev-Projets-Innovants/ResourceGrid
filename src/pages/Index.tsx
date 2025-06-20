@@ -1,12 +1,15 @@
 
-import { useState, useEffect } from "react";
-import { Search, ExternalLink, Star, Bookmark } from "lucide-react";
+import { useState } from "react";
 import { Sidebar } from "@/components/Sidebar";
-import { ResourceCard } from "@/components/ResourceCard";
 import { SearchBar } from "@/components/SearchBar";
-import { CategoryHeader } from "@/components/CategoryHeader";
+import { AppHeader } from "@/components/AppHeader";
+import { FeaturedSection } from "@/components/FeaturedSection";
+import { ResourceGrid } from "@/components/ResourceGrid";
+import { LoadingState } from "@/components/LoadingState";
 import { useCategories } from "@/hooks/useCategories";
 import { useResources } from "@/hooks/useResources";
+import { useResourceTransform } from "@/hooks/useResourceTransform";
+import { useResourceFilter } from "@/hooks/useResourceFilter";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -17,62 +20,14 @@ const Index = () => {
   const { data: resources = [], isLoading: resourcesLoading } = useResources();
 
   const categoryNames = ["All", ...categories.map(cat => cat.name)];
-
-  const getFilteredResources = () => {
-    let filteredResources = resources;
-    
-    // Filter by category
-    if (selectedCategory !== "All") {
-      filteredResources = filteredResources.filter(resource => 
-        resource.categories?.name === selectedCategory
-      );
-    }
-    
-    // Filter by search query
-    if (searchQuery) {
-      filteredResources = filteredResources.filter(resource =>
-        resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        resource.categories?.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
-    
-    return filteredResources;
-  };
-
-  const filteredResources = getFilteredResources();
+  const transformedResources = useResourceTransform(resources);
+  const filteredResources = useResourceFilter(transformedResources, selectedCategory, searchQuery);
+  
   const featuredResources = filteredResources.filter(resource => resource.featured);
-
-  // Transform resources to match the existing ResourceCard interface
-  const transformedResources = filteredResources.map(resource => ({
-    id: parseInt(resource.id.replace(/-/g, '').substring(0, 8), 16),
-    title: resource.title,
-    description: resource.description,
-    url: resource.url,
-    category: resource.categories?.name || 'Uncategorized',
-    tags: [resource.categories?.name || 'Uncategorized'],
-    featured: resource.featured
-  }));
-
-  const transformedFeaturedResources = featuredResources.map(resource => ({
-    id: parseInt(resource.id.replace(/-/g, '').substring(0, 8), 16),
-    title: resource.title,
-    description: resource.description,
-    url: resource.url,
-    category: resource.categories?.name || 'Uncategorized',
-    tags: [resource.categories?.name || 'Uncategorized'],
-    featured: resource.featured
-  }));
-
-  // Get non-featured resources for the main grid
-  const nonFeaturedResources = transformedResources.filter(resource => !resource.featured);
+  const nonFeaturedResources = filteredResources.filter(resource => !resource.featured);
 
   if (categoriesLoading || resourcesLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
-        <div className="text-white text-xl">Loading resources...</div>
-      </div>
-    );
+    return <LoadingState />;
   }
 
   return (
@@ -88,73 +43,23 @@ const Index = () => {
         
         <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'ml-0' : 'ml-0'}`}>
           <div className="p-6 lg:p-8">
-            {/* Header */}
-            <div className="mb-8">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h1 className="text-4xl lg:text-5xl font-bold text-white mb-2 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
-                    ResourceGrid
-                  </h1>
-                  <p className="text-lg text-purple-200">
-                    Your curated collection of essential resources
-                  </p>
-                </div>
-                <div className="hidden lg:flex items-center space-x-4">
-                  <div className="bg-white/10 backdrop-blur-md rounded-full px-4 py-2 text-white border border-white/20">
-                    {transformedResources.length} resources
-                  </div>
-                </div>
-              </div>
-              
-              <SearchBar
-                value={searchQuery}
-                onChange={setSearchQuery}
-                placeholder="Search resources..."
-              />
-            </div>
+            <AppHeader resourceCount={transformedResources.length} />
+            
+            <SearchBar
+              value={searchQuery}
+              onChange={setSearchQuery}
+              placeholder="Search resources..."
+            />
 
-            {/* Featured Section */}
-            {selectedCategory === "All" && transformedFeaturedResources.length > 0 && (
-              <div className="mb-8">
-                <CategoryHeader
-                  title="Featured Resources"
-                  count={transformedFeaturedResources.length}
-                  icon={<Star className="w-5 h-5" />}
-                />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {transformedFeaturedResources.map((resource) => (
-                    <ResourceCard key={resource.id} resource={resource} featured />
-                  ))}
-                </div>
-              </div>
-            )}
+            <FeaturedSection 
+              resources={featuredResources} 
+              selectedCategory={selectedCategory} 
+            />
 
-            {/* Main Resources Grid */}
-            <div>
-              <CategoryHeader
-                title={selectedCategory === "All" ? "All Resources" : selectedCategory}
-                count={nonFeaturedResources.length}
-                icon={<Bookmark className="w-5 h-5" />}
-              />
-              
-              {nonFeaturedResources.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {nonFeaturedResources.map((resource) => (
-                    <ResourceCard key={resource.id} resource={resource} />
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-12">
-                  <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
-                    <Search className="w-12 h-12 text-purple-300 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold text-white mb-2">No resources found</h3>
-                    <p className="text-purple-200">
-                      Try adjusting your search or browse different categories
-                    </p>
-                  </div>
-                </div>
-              )}
-            </div>
+            <ResourceGrid 
+              resources={nonFeaturedResources} 
+              selectedCategory={selectedCategory} 
+            />
           </div>
         </main>
       </div>
