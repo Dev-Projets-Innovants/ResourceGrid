@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Home, Search, Bookmark, Code, Monitor, Briefcase, Book, Tool, Grid2x2, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home, Search, Bookmark, Code, Monitor, Briefcase, Book, Wrench, Grid2x2, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SidebarProps {
@@ -27,7 +27,7 @@ export const Sidebar = ({
       "Design": Monitor,
       "Business": Briefcase,
       "Education": Book,
-      "Tools": Tool,
+      "Tools": Wrench,
       "Resources": Grid2x2,
       "Featured": Star,
     };
