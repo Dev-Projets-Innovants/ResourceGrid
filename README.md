@@ -1,4 +1,3 @@
-
 <div align="center">
   <img src="/ResourceGrid/lovable-uploads/9b9c9bb3-3897-4615-b8db-433d7014549c.png" alt="ResourceGrid Logo" width="300">
 </div>
