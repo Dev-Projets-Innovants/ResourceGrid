@@ -21,8 +21,6 @@ export const useResources = (categorySlug?: string) => {
   return useQuery({
     queryKey: ['resources', categorySlug],
     queryFn: async () => {
-      console.log('Fetching resources with categorySlug:', categorySlug);
-      
       let query = supabase
         .from('resources')
         .select(`
@@ -45,7 +43,6 @@ export const useResources = (categorySlug?: string) => {
         throw error;
       }
       
-      console.log('Fetched resources:', data);
       return data as Resource[];
     },
   });
