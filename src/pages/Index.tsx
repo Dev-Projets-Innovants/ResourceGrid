@@ -5,132 +5,78 @@ import { Sidebar } from "@/components/Sidebar";
 import { ResourceCard } from "@/components/ResourceCard";
 import { SearchBar } from "@/components/SearchBar";
 import { CategoryHeader } from "@/components/CategoryHeader";
-
-const resourcesData = {
-  "Web Development": [
-    {
-      id: 1,
-      title: "React Documentation",
-      description: "The official React documentation with guides and API reference",
-      url: "https://react.dev",
-      category: "Web Development",
-      tags: ["React", "Frontend", "JavaScript"],
-      featured: true
-    },
-    {
-      id: 2,
-      title: "MDN Web Docs",
-      description: "Complete web development documentation and tutorials",
-      url: "https://developer.mozilla.org",
-      category: "Web Development",
-      tags: ["HTML", "CSS", "JavaScript"],
-      featured: false
-    },
-    {
-      id: 3,
-      title: "Tailwind CSS",
-      description: "Utility-first CSS framework for rapid UI development",
-      url: "https://tailwindcss.com",
-      category: "Web Development",
-      tags: ["CSS", "Framework", "Styling"],
-      featured: true
-    }
-  ],
-  "Design Tools": [
-    {
-      id: 4,
-      title: "Figma",
-      description: "Collaborative interface design tool for teams",
-      url: "https://figma.com",
-      category: "Design Tools",
-      tags: ["Design", "UI/UX", "Collaboration"],
-      featured: true
-    },
-    {
-      id: 5,
-      title: "Dribbble",
-      description: "Creative community for design professionals",
-      url: "https://dribbble.com",
-      category: "Design Tools",
-      tags: ["Inspiration", "Community", "Portfolio"],
-      featured: false
-    }
-  ],
-  "Learning Resources": [
-    {
-      id: 6,
-      title: "freeCodeCamp",
-      description: "Learn to code with free online courses and certifications",
-      url: "https://freecodecamp.org",
-      category: "Learning Resources",
-      tags: ["Programming", "Courses", "Certification"],
-      featured: true
-    },
-    {
-      id: 7,
-      title: "Khan Academy",
-      description: "Free online courses, lessons and practice",
-      url: "https://khanacademy.org",
-      category: "Learning Resources",
-      tags: ["Education", "Math", "Science"],
-      featured: false
-    }
-  ],
-  "Productivity": [
-    {
-      id: 8,
-      title: "Notion",
-      description: "All-in-one workspace for notes, docs, and collaboration",
-      url: "https://notion.so",
-      category: "Productivity",
-      tags: ["Notes", "Organization", "Collaboration"],
-      featured: true
-    },
-    {
-      id: 9,
-      title: "Trello",
-      description: "Visual project management with boards and cards",
-      url: "https://trello.com",
-      category: "Productivity",
-      tags: ["Project Management", "Organization"],
-      featured: false
-    }
-  ]
-};
+import { useCategories } from "@/hooks/useCategories";
+import { useResources } from "@/hooks/useResources";
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  const categories = ["All", ...Object.keys(resourcesData)];
+  const { data: categories = [], isLoading: categoriesLoading } = useCategories();
+  const { data: resources = [], isLoading: resourcesLoading } = useResources();
+
+  const categoryNames = ["All", ...categories.map(cat => cat.name)];
 
   const getFilteredResources = () => {
-    let allResources = Object.values(resourcesData).flat();
+    let filteredResources = resources;
     
+    // Filter by category
     if (selectedCategory !== "All") {
-      allResources = allResources.filter(resource => resource.category === selectedCategory);
-    }
-    
-    if (searchQuery) {
-      allResources = allResources.filter(resource =>
-        resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        resource.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      filteredResources = filteredResources.filter(resource => 
+        resource.categories?.name === selectedCategory
       );
     }
     
-    return allResources;
+    // Filter by search query
+    if (searchQuery) {
+      filteredResources = filteredResources.filter(resource =>
+        resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        resource.categories?.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+    
+    return filteredResources;
   };
 
   const filteredResources = getFilteredResources();
   const featuredResources = filteredResources.filter(resource => resource.featured);
 
+  // Transform resources to match the existing ResourceCard interface
+  const transformedResources = filteredResources.map(resource => ({
+    id: parseInt(resource.id.replace(/-/g, '').substring(0, 8), 16), // Convert UUID to number for compatibility
+    title: resource.title,
+    description: resource.description,
+    url: resource.url,
+    category: resource.categories?.name || 'Uncategorized',
+    tags: [resource.categories?.name || 'Uncategorized'], // Using category as tag for now
+    featured: resource.featured
+  }));
+
+  const transformedFeaturedResources = featuredResources.map(resource => ({
+    id: parseInt(resource.id.replace(/-/g, '').substring(0, 8), 16),
+    title: resource.title,
+    description: resource.description,
+    url: resource.url,
+    category: resource.categories?.name || 'Uncategorized',
+    tags: [resource.categories?.name || 'Uncategorized'],
+    featured: resource.featured
+  }));
+
+  if (categoriesLoading || resourcesLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+        <div className="text-white text-xl">Loading resources...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
       <div className="flex">
         <Sidebar
-          categories={categories}
+          categories={categoryNames}
           selectedCategory={selectedCategory}
           onCategorySelect={setSelectedCategory}
           isOpen={sidebarOpen}
@@ -152,7 +98,7 @@ const Index = () => {
                 </div>
                 <div className="hidden lg:flex items-center space-x-4">
                   <div className="bg-white/10 backdrop-blur-md rounded-full px-4 py-2 text-white border border-white/20">
-                    {filteredResources.length} resources
+                    {transformedResources.length} resources
                   </div>
                 </div>
               </div>
@@ -165,15 +111,15 @@ const Index = () => {
             </div>
 
             {/* Featured Section */}
-            {selectedCategory === "All" && featuredResources.length > 0 && (
+            {selectedCategory === "All" && transformedFeaturedResources.length > 0 && (
               <div className="mb-8">
                 <CategoryHeader
                   title="Featured Resources"
-                  count={featuredResources.length}
+                  count={transformedFeaturedResources.length}
                   icon={<Star className="w-5 h-5" />}
                 />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {featuredResources.map((resource) => (
+                  {transformedFeaturedResources.map((resource) => (
                     <ResourceCard key={resource.id} resource={resource} featured />
                   ))}
                 </div>
@@ -184,13 +130,13 @@ const Index = () => {
             <div>
               <CategoryHeader
                 title={selectedCategory === "All" ? "All Resources" : selectedCategory}
-                count={filteredResources.length}
+                count={transformedResources.length}
                 icon={<Bookmark className="w-5 h-5" />}
               />
               
-              {filteredResources.length > 0 ? (
+              {transformedResources.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {filteredResources.map((resource) => (
+                  {transformedResources.map((resource) => (
                     <ResourceCard key={resource.id} resource={resource} />
                   ))}
                 </div>
