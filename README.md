@@ -1,77 +1,181 @@
+
 <div align="center">
-  <img src="public/lovable-uploads/9b9c9bb3-3897-4615-b8db-433d7014549c.png" alt="ResourceGrid Logo" width="300">
+  <img src="public/lovable-uploads/9b9c9bb3-3897-4615-b8db-433d7014549c.png" alt="ResourceGrid Logo" width="200">
+  
+  # ResourceGrid
+  
+  **Your Curated Collection of Essential Resources**
+  
+  [![Deploy Status](https://github.com/Dev-Projets-Innovants/ResourceGrid/actions/workflows/deploy.yml/badge.svg)](https://github.com/Dev-Projets-Innovants/ResourceGrid/actions/workflows/deploy.yml)
+  [![GitHub stars](https://img.shields.io/github/stars/Dev-Projets-Innovants/ResourceGrid?style=social)](https://github.com/Dev-Projets-Innovants/ResourceGrid/stargazers)
+  [![GitHub forks](https://img.shields.io/github/forks/Dev-Projets-Innovants/ResourceGrid?style=social)](https://github.com/Dev-Projets-Innovants/ResourceGrid/network/members)
+  [![GitHub issues](https://img.shields.io/github/issues/Dev-Projets-Innovants/ResourceGrid)](https://github.com/Dev-Projets-Innovants/ResourceGrid/issues)
+  [![GitHub license](https://img.shields.io/github/license/Dev-Projets-Innovants/ResourceGrid)](https://github.com/Dev-Projets-Innovants/ResourceGrid/blob/main/LICENSE)
+  
+  [Live Demo](https://dev-projets-innovants.github.io/ResourceGrid/) • [Report Bug](https://github.com/Dev-Projets-Innovants/ResourceGrid/issues) • [Request Feature](https://github.com/Dev-Projets-Innovants/ResourceGrid/issues)
 </div>
 
-# Welcome to your Lovable project
+## 🌟 About ResourceGrid
 
-## Project info
+ResourceGrid is a modern, responsive web application designed to help you organize and access your essential digital resources efficiently. With its futuristic design and intuitive interface, ResourceGrid provides a centralized platform for managing resources across different categories.
 
-**URL**: https://lovable.dev/projects/8cc68d31-4eda-4f36-8cd4-6e551a0628f2
+### ✨ Key Features
 
-## How can I edit this code?
+- **📂 Category Organization** - Organize resources by categories (Development, Design, Business, Education, Tools, etc.)
+- **🔍 Advanced Search** - Powerful search functionality to quickly find resources
+- **⭐ Featured Resources** - Highlight important resources with featured status
+- **🎨 Modern UI** - Beautiful, responsive design with glassmorphism effects
+- **📱 Mobile Responsive** - Fully optimized for all device sizes
+- **🔄 Real-time Filtering** - Filter resources by category, tags, and search terms
+- **📊 Resource Statistics** - Track resource counts and usage
+- **🌙 Dark Theme** - Modern dark theme with purple gradient aesthetics
 
-There are several ways of editing your application.
+## 🚀 Live Demo
 
-**Use Lovable**
+Visit the live application: [https://dev-projets-innovants.github.io/ResourceGrid/](https://dev-projets-innovants.github.io/ResourceGrid/)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/8cc68d31-4eda-4f36-8cd4-6e551a0628f2) and start prompting.
+## 🛠️ Built With
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Frontend Framework**: [React 18](https://reactjs.org/) with TypeScript
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) with custom animations
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/) + [Radix UI](https://www.radix-ui.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **State Management**: [TanStack React Query](https://tanstack.com/query/latest)
+- **Database**: [Supabase](https://supabase.com/)
+- **Routing**: [React Router DOM](https://reactrouter.com/)
+- **Forms**: [React Hook Form](https://react-hook-form.com/) with [Zod](https://zod.dev/) validation
 
-**Use your preferred IDE**
+## 📦 Installation & Setup
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Node.js (version 18 or higher)
+- npm or yarn package manager
 
-Follow these steps:
+### Local Development
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Dev-Projets-Innovants/ResourceGrid.git
+   cd ResourceGrid
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   Add your Supabase configuration to the `.env.local` file:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+4. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open your browser**
+   Navigate to `http://localhost:5173` to view the application.
+
+## 🚀 Deployment
+
+### GitHub Pages (Current Deployment)
+
+This project is automatically deployed to GitHub Pages using GitHub Actions. Every push to the `main` branch triggers the deployment workflow.
+
+**Deployment URL**: [https://dev-projets-innovants.github.io/ResourceGrid/](https://dev-projets-innovants.github.io/ResourceGrid/)
+
+### Manual Deployment
+
+1. **Build the project**
+   ```bash
+   npm run build
+   ```
+
+2. **Preview the build locally**
+   ```bash
+   npm run preview
+   ```
+
+3. **Deploy to your preferred platform**
+   - **Vercel**: Connect your GitHub repository to Vercel
+   - **Netlify**: Drag and drop the `dist` folder or connect via Git
+   - **GitHub Pages**: Push to `main` branch (automated via GitHub Actions)
+
+## 📁 Project Structure
+
+```
+ResourceGrid/
+├── public/                 # Static assets
+├── src/
+│   ├── components/        # Reusable UI components
+│   │   ├── ui/           # shadcn/ui components
+│   │   ├── AppHeader.tsx # Application header
+│   │   ├── Sidebar.tsx   # Navigation sidebar
+│   │   └── ...
+│   ├── hooks/            # Custom React hooks
+│   ├── integrations/     # External service integrations
+│   │   └── supabase/     # Supabase configuration
+│   ├── lib/              # Utility functions
+│   ├── pages/            # Page components
+│   └── main.tsx          # Application entry point
+├── supabase/             # Database migrations
+└── ...
 ```
 
-**Edit a file directly in GitHub**
+## 🎯 Usage
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. **Browse Resources**: Use the sidebar to navigate between different categories
+2. **Search**: Use the search bar to find specific resources
+3. **Filter**: Apply filters to narrow down your results
+4. **Sort**: Sort resources by title, category, or featured status
+5. **View Details**: Click on resource cards to view more information
 
-**Use GitHub Codespaces**
+## 🤝 Contributing
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+We welcome contributions! Please see our contributing guidelines:
 
-## What technologies are used for this project?
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-This project is built with:
+## 📝 License
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## How can I deploy this project?
+## 👥 Team
 
-Simply open [Lovable](https://lovable.dev/projects/8cc68d31-4eda-4f36-8cd4-6e551a0628f2) and click on Share -> Publish.
+- **[Wambaforestin](https://github.com/Wambaforestin)** - Project Owner & Lead Developer
+- **[Dev-Projets-Innovants](https://github.com/Dev-Projets-Innovants)** - Organization
 
-## Can I connect a custom domain to my Lovable project?
+## 🙏 Acknowledgments
 
-Yes, you can!
+- Thanks to all contributors who have helped shape ResourceGrid
+- Special thanks to the open-source community for the amazing tools and libraries
+- Icons provided by [Lucide](https://lucide.dev/)
+- UI components inspired by [shadcn/ui](https://ui.shadcn.com/)
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📞 Support
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+If you have any questions or need help, please:
+
+- 📧 Open an [issue](https://github.com/Dev-Projets-Innovants/ResourceGrid/issues)
+- ⭐ Star the repository if you find it useful
+- 🍴 Fork the project to contribute
+
+---
+
+<div align="center">
+  Made with ❤️ by the Dev-Projets-Innovants team
+  
+  ⭐ Star us on GitHub — it motivates us a lot!
+</div>
