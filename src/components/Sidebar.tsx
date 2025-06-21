@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Home, Search, Bookmark, Code, Monitor, Briefcase, Book, Wrench, Grid2x2, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -61,7 +60,7 @@ export const Sidebar = ({
         className={cn(
           "fixed left-0 top-0 h-full bg-white/10 backdrop-blur-md border-r border-white/20 z-50 transition-all duration-300 lg:relative lg:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full",
-          isOpen ? "w-64" : "w-16"
+          isOpen ? "w-80" : "w-16"
         )}
       >
         <div className="flex flex-col h-full">
@@ -107,10 +106,10 @@ export const Sidebar = ({
                   <IconComponent className="w-5 h-5 flex-shrink-0" />
                   {isOpen && (
                     <>
-                      <span className="font-medium truncate flex-1 text-left">{category}</span>
+                      <span className="font-medium text-left flex-1 min-w-0">{category}</span>
                       {count > 0 && (
                         <span className={cn(
-                          "text-xs px-2 py-1 rounded-full font-medium",
+                          "text-xs px-2 py-1 rounded-full font-medium flex-shrink-0",
                           selectedCategory === category
                             ? "bg-white/20 text-white"
                             : "bg-purple-500/20 text-purple-200"
