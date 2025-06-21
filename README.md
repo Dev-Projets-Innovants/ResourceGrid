@@ -1,6 +1,5 @@
-
 <div align="center">
-  <img src="public/lovable-uploads/9b9c9bb3-3897-4615-b8db-433d7014549c.png" alt="ResourceGrid Logo" width="200">
+  <img src="public/lovable-uploads/150687de-df3b-4fd9-8c8e-0ac78ba08488.png" alt="ResourceGrid Logo" width="200">
   
   # ResourceGrid
   
