@@ -9,15 +9,14 @@
   [![GitHub stars](https://img.shields.io/github/stars/Dev-Projets-Innovants/ResourceGrid?style=social)](https://github.com/Dev-Projets-Innovants/ResourceGrid/stargazers)
   [![GitHub forks](https://img.shields.io/github/forks/Dev-Projets-Innovants/ResourceGrid?style=social)](https://github.com/Dev-Projets-Innovants/ResourceGrid/network/members)
   [![GitHub issues](https://img.shields.io/github/issues/Dev-Projets-Innovants/ResourceGrid)](https://github.com/Dev-Projets-Innovants/ResourceGrid/issues)
-  [![GitHub license](https://img.shields.io/github/license/Dev-Projets-Innovants/ResourceGrid)](https://github.com/Dev-Projets-Innovants/ResourceGrid/blob/main/LICENSE)
   
 </div>
 
-## 🌟 About ResourceGrid
+## About ResourceGrid
 
 ResourceGrid is a modern, responsive web application designed to help you organize and access your essential digital resources efficiently. With its futuristic design and intuitive interface, ResourceGrid provides a centralized platform for managing resources across different categories.
 
-### ✨ Key Features
+### Key Features
 
 - **📂 Category Organization** - Organize resources by categories (Development, Design, Business, Education, Tools, etc.)
 - **🔍 Advanced Search** - Powerful search functionality to quickly find resources
@@ -28,11 +27,11 @@ ResourceGrid is a modern, responsive web application designed to help you organi
 - **📊 Resource Statistics** - Track resource counts and usage
 - **🌙 Dark Theme** - Modern dark theme with purple gradient aesthetics
 
-## 🚀 Live Demo
+## Live Demo
 
 Visit the live application: [https://dev-projets-innovants.github.io/ResourceGrid/](https://dev-projets-innovants.github.io/ResourceGrid/)
 
-## 🛠️ Built With
+## Built With
 
 - **Frontend Framework**: [React 18](https://reactjs.org/) with TypeScript
 - **Build Tool**: [Vite](https://vitejs.dev/)
@@ -44,7 +43,7 @@ Visit the live application: [https://dev-projets-innovants.github.io/ResourceGri
 - **Routing**: [React Router DOM](https://reactrouter.com/)
 - **Forms**: [React Hook Form](https://react-hook-form.com/) with [Zod](https://zod.dev/) validation
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 
@@ -83,7 +82,7 @@ Visit the live application: [https://dev-projets-innovants.github.io/ResourceGri
 5. **Open your browser**
    Navigate to `http://localhost:5173` to view the application.
 
-## 🚀 Deployment
+## Deployment
 
 ### GitHub Pages (Current Deployment)
 
@@ -108,7 +107,7 @@ This project is automatically deployed to GitHub Pages using GitHub Actions. Eve
    - **Netlify**: Drag and drop the `dist` folder or connect via Git
    - **GitHub Pages**: Push to `main` branch (automated via GitHub Actions)
 
-## 📁 Project Structure
+## roject Structure
 
 ```
 ResourceGrid/
@@ -129,7 +128,7 @@ ResourceGrid/
 └── ...
 ```
 
-## 🎯 Usage
+## Usage
 
 1. **Browse Resources**: Use the sidebar to navigate between different categories
 2. **Search**: Use the search bar to find specific resources
@@ -137,11 +136,11 @@ ResourceGrid/
 4. **Sort**: Sort resources by title, category, or featured status
 5. **View Details**: Click on resource cards to view more information
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👥 Team
+## Team
 
 - **[Wambaforestin](https://github.com/Wambaforestin)** - Project Owner.
 - **[Dev-Projets-Innovants](https://github.com/Dev-Projets-Innovants)** - Organization
