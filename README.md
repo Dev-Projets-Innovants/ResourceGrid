@@ -11,7 +11,6 @@
   [![GitHub issues](https://img.shields.io/github/issues/Dev-Projets-Innovants/ResourceGrid)](https://github.com/Dev-Projets-Innovants/ResourceGrid/issues)
   [![GitHub license](https://img.shields.io/github/license/Dev-Projets-Innovants/ResourceGrid)](https://github.com/Dev-Projets-Innovants/ResourceGrid/blob/main/LICENSE)
   
-  [Live Demo](https://dev-projets-innovants.github.io/ResourceGrid/) • [Report Bug](https://github.com/Dev-Projets-Innovants/ResourceGrid/issues) • [Request Feature](https://github.com/Dev-Projets-Innovants/ResourceGrid/issues)
 </div>
 
 ## 🌟 About ResourceGrid
@@ -73,6 +72,7 @@ Visit the live application: [https://dev-projets-innovants.github.io/ResourceGri
    ```env
    VITE_SUPABASE_URL=your_supabase_url
    VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   Note : Ask the database owner.
    ```
 
 4. **Start the development server**
@@ -137,29 +137,19 @@ ResourceGrid/
 4. **Sort**: Sort resources by title, category, or featured status
 5. **View Details**: Click on resource cards to view more information
 
-## 🤝 Contributing
-
-We welcome contributions! Please see our contributing guidelines:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👥 Team
 
-- **[Wambaforestin](https://github.com/Wambaforestin)** - Project Owner & Lead Developer
+- **[Wambaforestin](https://github.com/Wambaforestin)** - Project Owner.
 - **[Dev-Projets-Innovants](https://github.com/Dev-Projets-Innovants)** - Organization
 
 ## 🙏 Acknowledgments
 
 - Thanks to all contributors who have helped shape ResourceGrid
-- Special thanks to the open-source community for the amazing tools and libraries
+- links and resources from [bradtraversy](https://github.com/bradtraversy/design-resources-for-developers)
 - Icons provided by [Lucide](https://lucide.dev/)
 - UI components inspired by [shadcn/ui](https://ui.shadcn.com/)
 
@@ -170,11 +160,3 @@ If you have any questions or need help, please:
 - 📧 Open an [issue](https://github.com/Dev-Projets-Innovants/ResourceGrid/issues)
 - ⭐ Star the repository if you find it useful
 - 🍴 Fork the project to contribute
-
----
-
-<div align="center">
-  Made with ❤️ by the Dev-Projets-Innovants team
-  
-  ⭐ Star us on GitHub — it motivates us a lot!
-</div>
